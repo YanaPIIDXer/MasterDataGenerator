@@ -26,14 +26,20 @@ namespace MasterDataGenerator
 		public string BinaryPath { get; set; }
 
 		/// <summary>
+		/// Excelファイルの入ったルートディレクトリ
+		/// </summary>
+		public string MasterExcelFileRoot { get; set; }
+
+		/// <summary>
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="sourcePath">ソースファイルの保存先</param>
 		/// <param name="binaryPath">バイナリファイルの保存先</param>
-		public SettingFile(string sourcePath = "out/sources", string binaryPath = "out/binaries")
+		public SettingFile(string sourcePath = "out/sources", string binaryPath = "out/binaries", string masterExcelFileRoot = "master")
 		{
 			SourcePath = sourcePath;
 			BinaryPath = binaryPath;
+			MasterExcelFileRoot = masterExcelFileRoot;
 		}
 
 		/// <summary>
