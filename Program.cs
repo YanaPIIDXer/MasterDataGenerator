@@ -17,6 +17,7 @@ namespace MasterDataGenerator
 				Console.WriteLine("設定ファイルが無かったので新規作成します");
 				settings = new SettingFile();
 				settings.Save(SettingFilePath);
+				return;
 			}
 		}
 	}
