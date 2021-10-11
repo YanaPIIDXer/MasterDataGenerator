@@ -28,6 +28,7 @@ namespace MasterDataGenerator
 		/// <summary>
 		/// Excelファイルの入ったルートディレクトリ
 		/// </summary>
+		[DataMember]
 		public string MasterExcelFileRoot { get; set; }
 
 		/// <summary>
