@@ -1,0 +1,2 @@
+# MasterDataGenerator
+ゲームで使うマスタデータ生成ツール
