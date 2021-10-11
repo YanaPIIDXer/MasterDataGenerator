@@ -32,15 +32,24 @@ namespace MasterDataGenerator
 		public string MasterExcelFileRoot { get; set; }
 
 		/// <summary>
+		/// namespace
+		/// </summary>
+		[DataMember]
+		public string NameSpace { get; private set; }
+
+		/// <summary>
 		/// コンストラクタ
 		/// </summary>
 		/// <param name="sourcePath">ソースファイルの保存先</param>
 		/// <param name="binaryPath">バイナリファイルの保存先</param>
-		public SettingFile(string sourcePath = "out/sources", string binaryPath = "out/binaries", string masterExcelFileRoot = "master")
+		/// <param name="masterExcelFileRoot">Excelファイルの入ったルートディレクトリ</param>
+		/// <param name="nameSpace">namespace</param>
+		public SettingFile(string sourcePath = "out/sources", string binaryPath = "out/binaries", string masterExcelFileRoot = "master", string nameSpace = "Common.Master")
 		{
 			SourcePath = sourcePath;
 			BinaryPath = binaryPath;
 			MasterExcelFileRoot = masterExcelFileRoot;
+			NameSpace = nameSpace;
 		}
 
 		/// <summary>
