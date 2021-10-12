@@ -38,7 +38,8 @@ namespace MasterDataGenerator
 		/// <param name="properties">プロパティリスト</param>
 		public void Generate(string masterName, List<PropertyData> properties)
 		{
-			string text = string.Format("namespace {0}\n", nameSpace);
+			string text = "using Stream;\n\n";
+			text += string.Format("namespace {0}\n", nameSpace);
 			text += "{\n";
 			text += string.Format("\tpublic class {0}Data\n", masterName);
 			text += "\t{\n";
@@ -47,19 +48,11 @@ namespace MasterDataGenerator
 				text += string.Format("\t\tpublic {0} {1} ", prop.TypeName, prop.Name) + "{ get; private set; }\n";
 			}
 			text += "\n";
-			text += string.Format("\t\tpublic {0}Data(", masterName);
-			for (int i = 0; i < properties.Count; i++)
-			{
-				var prop = properties[i];
-				text += string.Format("{0} {1}", prop.TypeName, prop.Name);
-				if (i + 1 < properties.Count)
-				{
-					text += ", ";
-				}
-			}
-			text += ")\n\t\t{\n";
+			text += "\t\tpublic void Serialize(IMemoryStream stream)\n\t\t{\n";
 			foreach (var prop in properties)
 			{
+				text += "\t\t\t" + prop.TypeName + " " + prop.Name + ";\n";
+				text += "\t\t\tstream.Serialize(ref " + prop.Name + ");\n";
 				text += "\t\t\tthis." + prop.Name + " = " + prop.Name + ";\n";
 			}
 			text += "\t\t}\n\t}\n}\n";
