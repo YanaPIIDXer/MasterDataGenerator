@@ -51,7 +51,7 @@ namespace MasterDataGenerator
 			text += "\t\tpublic void Serialize(IMemoryStream stream)\n\t\t{\n";
 			foreach (var prop in properties)
 			{
-				text += "\t\t\t" + prop.TypeName + " " + prop.Name + ";\n";
+				text += "\t\t\t" + prop.TypeName + " " + prop.Name + " = " + (prop.TypeName != "string" ? "new " + prop.TypeName + "()" : "\"\"") + ";\n";
 				text += "\t\t\tstream.Serialize(ref " + prop.Name + ");\n";
 				text += "\t\t\tthis." + prop.Name + " = " + prop.Name + ";\n";
 			}
