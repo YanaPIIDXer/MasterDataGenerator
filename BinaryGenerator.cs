@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Stream;
+using System.Security.Cryptography;
 
 namespace MasterDataGenerator
 {
@@ -31,7 +32,7 @@ namespace MasterDataGenerator
 		/// <param name="filePrefix">ファイルのプレフィクス</param>
 		/// <param name="columnList">カラムリスト</param>
 		/// <param name="properties">プロパティリスト</param>
-		public void Generate(string filePrefix, List<object[]> columnList, List<PropertyData> properties)
+		public byte[] Generate(string filePrefix, List<object[]> columnList, List<PropertyData> properties)
 		{
 			if (!Directory.Exists(outputDir))
 			{
@@ -112,6 +113,10 @@ namespace MasterDataGenerator
 				string filePath = Path.Combine(outputDir, filePrefix + "Master.byte");
 				File.WriteAllBytes(filePath, writer.Buffer.ToArray());
 			}
+
+			var hash = MD5.Create();
+			byte[] hashBytes = hash.ComputeHash(writer.Buffer.ToArray());
+			return hashBytes;
 		}
 	}
 }
