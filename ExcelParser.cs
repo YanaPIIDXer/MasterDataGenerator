@@ -149,7 +149,27 @@ namespace MasterDataGenerator
 				object[] columnDatas = new object[columnCount];
 				for (int column = 2, i = 0; i < columnCount; column++, i++)
 				{
-					columnDatas[i] = workSheet.Cells[row, column].Value;
+					// セルの中身が整数だろうが問答無用でdouble型として扱われる問題がある
+					switch (Properties[i].TypeName)
+					{
+						case "int":
+						case "uint":
+						case "short":
+						case "ushort":
+						case "char":
+						case "byte":
+							// 整数型なら整数型に変換する
+							columnDatas[i] = Convert.ToInt32(workSheet.Cells[row, column].Value);
+							break;
+						case "float":
+							// 小数型ならfloatに変換する
+							columnDatas[i] = Convert.ToSingle(workSheet.Cells[row, column].Value);
+							break;
+						default:
+							// そうでないならそのままブチ込む
+							columnDatas[i] = workSheet.Cells[row, column].Value;
+							break;
+					}
 				}
 				Columns.Add(columnDatas);
 			}
