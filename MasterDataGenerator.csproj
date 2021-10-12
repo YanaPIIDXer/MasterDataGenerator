@@ -9,4 +9,8 @@
     <PackageReference Include="EPPlus" Version="5.7.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Stream\" />
+  </ItemGroup>
+
 </Project>

@@ -24,10 +24,12 @@ namespace MasterDataGenerator
 			// Excelファイルの列挙
 			var excels = Directory.GetFiles(settings.MasterExcelFileRoot, "*.xlsx", SearchOption.AllDirectories);
 			SourceGenerator sourceGenerator = new SourceGenerator(settings.SourcePath, settings.NameSpace);
+			BinaryGenerator binaryGenerator = new BinaryGenerator(settings.BinaryPath);
 			foreach (var excel in excels)
 			{
 				var parsedData = ExcelParser.Create(excel);
 				sourceGenerator.Generate(Path.GetFileNameWithoutExtension(excel), parsedData.Properties);
+				binaryGenerator.Generate(Path.GetFileNameWithoutExtension(excel), parsedData.Columns, parsedData.Properties);
 			}
 		}
 	}
