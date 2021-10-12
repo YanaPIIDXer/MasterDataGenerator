@@ -55,7 +55,22 @@ namespace MasterDataGenerator
 				text += "\t\t\tstream.Serialize(ref " + prop.Name + ");\n";
 				text += "\t\t\tthis." + prop.Name + " = " + prop.Name + ";\n";
 			}
-			text += "\t\t}\n\t}\n}\n";
+			text += "\t\t}\n\n";
+			text += "\t\tpublic static " + masterName + "Data[] SerializeAll(byte[] buffer)\n";
+			text += "\t\t{\n";
+			text += "\t\t\tMemoryStreamReader reader = new MemoryStreamReader(buffer);\n";
+			text += "\t\t\tint size = 0;\n";
+			text += "\t\t\treader.Serialize(ref size);\n";
+			text += "\t\t\t" + masterName + "Data[] datas = new " + masterName + "Data[size];\n";
+			text += "\t\t\tfor (int i = 0; i < size; i++)\n";
+			text += "\t\t\t{\n";
+			text += "\t\t\t\t" + masterName + "Data data = new " + masterName + "Data();\n";
+			text += "\t\t\t\tdata.Serialize(reader);\n";
+			text += "\t\t\t\tdatas[i] = data;\n";
+			text += "\t\t\t}\n";
+			text += "\t\t\treturn datas;\n";
+			text += "\t\t}\n";
+			text += "\t}\n}\n";
 
 			if (!Directory.Exists(outputDir))
 			{
