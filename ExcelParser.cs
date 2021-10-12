@@ -58,8 +58,8 @@ namespace MasterDataGenerator
 		/// 生成
 		/// </summary>
 		/// <param name="filePath">ファイルパス</param>
-		/// <returns>パーサ</returns>
-		public static ExcelParser Create(string filePath)
+		/// <returns>パースしたデータ</returns>
+		public static IParsedData Create(string filePath)
 		{
 			ExcelParser parser = new ExcelParser();
 			parser.ParseFile(filePath);

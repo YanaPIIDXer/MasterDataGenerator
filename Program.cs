@@ -23,22 +23,11 @@ namespace MasterDataGenerator
 
 			// Excelファイルの列挙
 			var excels = Directory.GetFiles(settings.MasterExcelFileRoot, "*.xlsx", SearchOption.AllDirectories);
+			SourceGenerator sourceGenerator = new SourceGenerator(settings.SourcePath, settings.NameSpace);
 			foreach (var excel in excels)
 			{
-				ExcelParser parser = ExcelParser.Create(excel);
-				// デバッグ出力
-				{
-					Console.WriteLine("PropertyCount:" + parser.Properties.Count);
-					foreach (var columns in parser.Columns)
-					{
-						for (int i = 0; i < parser.Properties.Count; i++)
-						{
-							var prop = parser.Properties[i];
-							Console.WriteLine(prop.Name + "(" + prop.TypeName + ")" + ": " + columns[i]);
-						}
-						Console.WriteLine("");
-					}
-				}
+				var parsedData = ExcelParser.Create(excel);
+				sourceGenerator.Generate(Path.GetFileNameWithoutExtension(excel), parsedData.Properties);
 			}
 		}
 	}
