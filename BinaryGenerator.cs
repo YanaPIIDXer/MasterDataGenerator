@@ -110,7 +110,7 @@ namespace MasterDataGenerator
 					}
 				}
 
-				string filePath = Path.Combine(outputDir, filePrefix + "Master.byte");
+				string filePath = Path.Combine(outputDir, filePrefix + "Master.bytes");
 				File.WriteAllBytes(filePath, writer.Buffer.ToArray());
 			}
 

@@ -33,7 +33,7 @@ namespace MasterDataGenerator
 				var parsedData = ExcelParser.Create(excel);
 				sourceGenerator.Generate(Path.GetFileNameWithoutExtension(excel), parsedData.Properties);
 				var hash = binaryGenerator.Generate(Path.GetFileNameWithoutExtension(excel), parsedData.Columns, parsedData.Properties);
-				versionText += Path.GetFileNameWithoutExtension(excel) + "Master.byte" + "," + string.Join("", hash.Select(x => $"{x:x2}")) + "\n";
+				versionText += Path.GetFileNameWithoutExtension(excel) + "Master.bytes" + "," + string.Join("", hash.Select(x => $"{x:x2}")) + "\n";
 			}
 			File.WriteAllText(Path.Combine(settings.BinaryPath, "Version.csv"), versionText);
 		}

@@ -6,181 +6,181 @@ using System.Threading.Tasks;
 
 namespace Stream
 {
-	/// <summary>
-	/// ストリーム書き込み
-	/// </summary>
-	public class MemoryStreamWriter : IMemoryStream
-	{
-		/// <summary>
-		/// バッファ
-		/// </summary>
-		public List<byte> Buffer { get; private set; }
+    /// <summary>
+    /// ストリーム書き込み
+    /// </summary>
+    public class MemoryStreamWriter : IMemoryStream
+    {
+        /// <summary>
+        /// バッファ
+        /// </summary>
+        public List<byte> Buffer { get; private set; }
 
-		/// <summary>
-		/// 文字列エンコード
-		/// </summary>
-		public Encoding StringEncord { set; private get; }
+        /// <summary>
+        /// 文字列エンコード
+        /// </summary>
+        public Encoding StringEncord { set; private get; }
 
-		/// <summary>
-		/// コンストラクタ
-		/// </summary>
-		public MemoryStreamWriter()
-		{
-			Buffer = new List<byte>();
-			StringEncord = Encoding.UTF8;
-		}
-		
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref int Data)
-		{
-			byte[] Bytes = BitConverter.GetBytes(Data);
-			if(BitConverter.IsLittleEndian)
-			{
-				Array.Reverse(Bytes);
-			}
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public MemoryStreamWriter()
+        {
+            Buffer = new List<byte>();
+            StringEncord = Encoding.UTF8;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref int Data)
+        {
+            byte[] Bytes = BitConverter.GetBytes(Data);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(Bytes);
+            }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref uint Data)
-		{
-			byte[] Bytes = BitConverter.GetBytes(Data);
-			if (BitConverter.IsLittleEndian)
-			{
-				Array.Reverse(Bytes);
-			}
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref uint Data)
+        {
+            byte[] Bytes = BitConverter.GetBytes(Data);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(Bytes);
+            }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref short Data)
-		{
-			byte[] Bytes = BitConverter.GetBytes(Data);
-			if (BitConverter.IsLittleEndian)
-			{
-				Array.Reverse(Bytes);
-			}
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref short Data)
+        {
+            byte[] Bytes = BitConverter.GetBytes(Data);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(Bytes);
+            }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref ushort Data)
-		{
-			byte[] Bytes = BitConverter.GetBytes(Data);
-			if (BitConverter.IsLittleEndian)
-			{
-				Array.Reverse(Bytes);
-			}
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref ushort Data)
+        {
+            byte[] Bytes = BitConverter.GetBytes(Data);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(Bytes);
+            }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref char Data)
-		{
-			byte[] Bytes = new byte[1];
-			Bytes[0] = (byte) Data;
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref char Data)
+        {
+            byte[] Bytes = new byte[1];
+            Bytes[0] = (byte)Data;
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref byte Data)
-		{
-			byte[] Bytes = new byte[1];
-			Bytes[0] = Data;
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref byte Data)
+        {
+            byte[] Bytes = new byte[1];
+            Bytes[0] = Data;
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref float Data)
-		{
-			byte[] Bytes = BitConverter.GetBytes(Data);
-			if (BitConverter.IsLittleEndian)
-			{
-				Array.Reverse(Bytes);
-			}
+            Write(Bytes);
+            return true;
+        }
 
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref float Data)
+        {
+            byte[] Bytes = BitConverter.GetBytes(Data);
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(Bytes);
+            }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref string Data)
-		{
-			int Length = Data.Length;
-			if(!Serialize(ref Length)) { return false; }
+            Write(Bytes);
+            return true;
+        }
 
-			byte[] Bytes = StringEncord.GetBytes(Data);
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref string Data)
+        {
+            byte[] Bytes = StringEncord.GetBytes(Data);
+            int Length = Bytes.Length;
+            if (!Serialize(ref Length)) { return false; }
 
-		/// <summary>
-		/// シリアライズ
-		/// </summary>
-		/// <param name="Data">データ</param>
-		/// <param name="Length">バイト長</param>
-		/// <returns>成功したらtrueを返す</returns>
-		public bool Serialize(ref char[] Data, int Length)
-		{
-			byte[] Bytes = new byte[Length];
+            Write(Bytes);
+            return true;
+        }
 
-			Array.Copy(Data, Bytes, Length);
-			Write(Bytes);
-			return true;
-		}
+        /// <summary>
+        /// シリアライズ
+        /// </summary>
+        /// <param name="Data">データ</param>
+        /// <param name="Length">バイト長</param>
+        /// <returns>成功したらtrueを返す</returns>
+        public bool Serialize(ref char[] Data, int Length)
+        {
+            byte[] Bytes = new byte[Length];
 
-		/// <summary>
-		/// 書き込み
-		/// </summary>
-		/// <param name="Bytes">バイト配列</param>
-		/// <returns>成功したらtrueを返す</returns>
-		private void Write(byte[] Bytes)
-		{
-			Buffer.AddRange(Bytes);
-		}
-	}
+            Array.Copy(Data, Bytes, Length);
+            Write(Bytes);
+            return true;
+        }
+
+        /// <summary>
+        /// 書き込み
+        /// </summary>
+        /// <param name="Bytes">バイト配列</param>
+        /// <returns>成功したらtrueを返す</returns>
+        private void Write(byte[] Bytes)
+        {
+            Buffer.AddRange(Bytes);
+        }
+    }
 }
