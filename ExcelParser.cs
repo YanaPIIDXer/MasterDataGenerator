@@ -149,24 +149,34 @@ namespace MasterDataGenerator
 				object[] columnDatas = new object[columnCount];
 				for (int column = 2, i = 0; i < columnCount; column++, i++)
 				{
-					// セルの中身が整数だろうが問答無用でdouble型として扱われる問題がある
+					// セルの中身が整数だろうが問答無用でdouble型として扱われるので、
+					// それぞれの型にキャストしておく必要がある
 					switch (Properties[i].TypeName)
 					{
 						case "int":
-						case "uint":
-						case "short":
-						case "ushort":
-						case "char":
-						case "byte":
-							// 整数型なら整数型に変換する
 							columnDatas[i] = Convert.ToInt32(workSheet.Cells[row, column].Value);
 							break;
+						case "uint":
+							columnDatas[i] = Convert.ToUInt32(workSheet.Cells[row, column].Value);
+							break;
+						case "short":
+							columnDatas[i] = Convert.ToInt16(workSheet.Cells[row, column].Value);
+							break;
+						case "ushort":
+							columnDatas[i] = Convert.ToUInt16(workSheet.Cells[row, column].Value);
+							break;
+						case "char":
+							// 何故かchar型は一旦int型を経由する必要がある
+							columnDatas[i] = Convert.ToChar(Convert.ToInt32(workSheet.Cells[row, column].Value));
+							break;
+						case "byte":
+							columnDatas[i] = Convert.ToByte(workSheet.Cells[row, column].Value);
+							break;
 						case "float":
-							// 小数型ならfloatに変換する
 							columnDatas[i] = Convert.ToSingle(workSheet.Cells[row, column].Value);
 							break;
 						default:
-							// そうでないならそのままブチ込む
+							// 上記以外はそのままブチ込む
 							columnDatas[i] = workSheet.Cells[row, column].Value;
 							break;
 					}
